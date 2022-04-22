@@ -7,13 +7,14 @@ nav {
   height: 64px;
   box-shadow: $box-shadow-1;
   background-color: #fff;
+  position: relative;
+  z-index: 100;
 
   &.fixed {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
     animation: slidedown 0.7s forwards;
   }
 
