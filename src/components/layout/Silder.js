@@ -13,7 +13,7 @@ const contentStyle = {
 const imgStyle = {
     objectFit: 'fill',
     height: '400px',
-    width: '100%'
+    width: '100%',
 }
 
 const Slider = () => (
