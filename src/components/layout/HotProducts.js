@@ -4,23 +4,28 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 const data = [
     {
         title: 'Voucher 1',
-        img: './image/voucher1.png'
+        img: './image/voucher1.png',
+        price: '300k'
     },
     {
         title: 'Voucher 2',
-        img: './image/voucher2.png'
+        img: './image/voucher2.png',
+        price: '600k'
     },
     {
         title: 'Voucher 3',
-        img: './image/voucher3.png'
+        img: './image/voucher3.png',
+        price: '500k'
     },
     {
         title: 'Voucher 4',
-        img: './image/voucher4.png'
+        img: './image/voucher4.png',
+        price: '1100k'
     },
     {
         title: 'Voucher 5',
-        img: './image/voucher1.png'
+        img: './image/voucher1.png',
+        price: '920k'
     },
 ];
 
