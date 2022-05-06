@@ -10,7 +10,7 @@ const Newletter = () => {
         <h3>Save time, save money!</h3>
         <p>Sign up and we'll send the best deals to you</p>
       </div>
-      <div className="input_newletter">
+      <div className="input_newletter" style={{ overflow: "hidden" }}>
         <Form>
           <Row style={{ justifyContent: "center", paddingTop: "30px" }}>
             <Col xs={6}>
