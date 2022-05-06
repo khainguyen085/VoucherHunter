@@ -4,7 +4,7 @@ const News = () => {
     return (
         <div>
             <Row xs={1} md={4} className="g-4" style={{ padding: "10px" }}>
-                {Array.from({ length: 4 }).map((_, idx) => (
+                {Array.from({ length: 8 }).map((_, idx) => (
                     <Col>
                         <Card>
                             <Card.Img variant="top" src="https://cdn1.hoanghamobile.com/tin-tuc/wp-content/uploads/2020/03/nhung-smartphone-chup-anh-dep-1.jpg" />
