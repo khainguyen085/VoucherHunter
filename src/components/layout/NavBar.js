@@ -130,7 +130,7 @@ const NavBar = () => {
               </li>
               <li>Log out</li>
             </ul>
-            <CartPopUp show={showCart} />
+            <CartPopUp show={showCart} setShowCart={setShowCart} />
           </>
         ) : (
           <>

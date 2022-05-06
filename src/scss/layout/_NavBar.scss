@@ -10,6 +10,10 @@ nav {
   position: relative;
   z-index: 100;
 
+  a {
+    text-decoration: none;
+  }
+
   &.fixed {
     position: fixed;
     top: 0;
@@ -179,7 +183,7 @@ nav {
   a {
     color: $dark-grey;
     &.active-link {
-      color: $secondary-color;
+      color: $primary;
     }
   }
 
