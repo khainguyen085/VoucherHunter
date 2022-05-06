@@ -3,7 +3,6 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import BackToTopBtn from "./BackToTopBtn";
 
-
 const Layout = ({ children }) => {
   return (
     <>
