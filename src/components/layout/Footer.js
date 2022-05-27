@@ -200,7 +200,7 @@ const Footer = () => {
       </div>
       <div className="py-3">
         <p className="text-center mb-0 text-black">
-          &copy; 2022, MindX Technology School
+          &copy; Copyright belongs to <b>TeamTwo</b>
         </p>
       </div>
     </footer>
