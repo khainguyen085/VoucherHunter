@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
 import CartPopUp from "./CartPopUp";
+import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const isAuthenticated = true;
 
   const toggleShowCart = (e) => {
     e.stopPropagation();
@@ -36,7 +37,7 @@ const NavBar = () => {
 
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      if (isAuthenticated) {
+      if (user) {
         const accountMenu = document.querySelector(".account-menu");
         const cart = document.querySelector(".cart-pop-up");
 
@@ -68,7 +69,7 @@ const NavBar = () => {
     });
 
     //eslint-disable-next-line
-  }, [isAuthenticated, showAccountMenu, showCart]);
+  }, [user, showAccountMenu, showCart]);
 
   return (
     <nav>
@@ -107,7 +108,7 @@ const NavBar = () => {
         <div className="back-drop" onClick={closeMenu}></div>
       </div>
       <div className="nav-right">
-        {isAuthenticated ? (
+        {user ? (
           <>
             <i
               className="bi bi-bag-heart"

@@ -1,11 +1,11 @@
-import React from "react";
 import "@dotlottie/player-component";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ProductItem from "./ProductItem";
 
 const CartPopUp = ({ show, setShowCart }) => {
-  const { cart, totalPrice } = useSelector((state) => state);
+  const { cart, totalPrice } = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
   const handlePushCheckout = () => {

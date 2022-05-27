@@ -5,7 +5,7 @@ import ListCart from "../components/Cart/ListCart";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { cart } = useSelector((state) => state);
+  const { cart } = useSelector((state) => state.cart);
 
   return (
     <section className="container d-block shopping-cart__container my-5">
