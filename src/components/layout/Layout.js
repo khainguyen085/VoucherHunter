@@ -1,13 +1,14 @@
 import React from "react";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import { Outlet } from "react-router-dom";
 import BackToTopBtn from "./BackToTopBtn";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <>
       <NavBar />
-      {children}
+      <Outlet />
       <Footer />
       <BackToTopBtn />
     </>
