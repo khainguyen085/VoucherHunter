@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery } from "redux-saga/effects";
+import { all, call, delay, put, takeEvery } from "redux-saga/effects";
 import { LOAD_USER, LOG_IN, SIGN_UP } from "../actions/actionType";
 import authActions from "../actions/authActions";
 import API from "../services/api";
@@ -23,7 +23,6 @@ function* loginWork({ payload: userInfo }) {
   try {
     const token = yield call(API.login, userInfo);
     localStorage.token = token;
-    console.log(token);
     yield put(authActions.loadUser());
   } catch (err) {
     yield put(authActions.loginFailed(err.message));
@@ -40,10 +39,13 @@ function* loadUserWork() {
     const token = localStorage.token;
     if (token) {
       setAuthToken(token);
+      const user = yield call(API.loadUser);
+      yield put(authActions.setLoading());
+      yield delay(500);
+      yield put(authActions.getUser(user));
+    } else {
+      yield put(authActions.loadUserFailed());
     }
-
-    const user = yield call(API.loadUser);
-    yield put(authActions.getUser(user));
   } catch (err) {
     yield put(authActions.loadUserFailed());
     console.log(err.message);

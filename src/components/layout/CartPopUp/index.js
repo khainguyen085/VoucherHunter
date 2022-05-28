@@ -36,6 +36,7 @@ const CartPopUp = ({ show, setShowCart }) => {
   return (
     <div
       className={`dropdown-menu cart-pop-up cart-wrapper ${show ? "show" : ""}`}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="list-product pb-3">
         {cart.map((item) => (

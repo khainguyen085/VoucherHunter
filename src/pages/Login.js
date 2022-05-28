@@ -1,7 +1,9 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import authActions from "../actions/authActions";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email!").required("Email is required!"),
@@ -16,8 +18,12 @@ const initialValues = {
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleSubmit = (values) => {
-    console.log(values);
+    const { email, password } = values;
+
+    dispatch(authActions.login({ email, password }));
   };
 
   return (

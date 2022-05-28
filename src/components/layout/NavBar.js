@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import authActions from "../../actions/authActions";
 import CartPopUp from "./CartPopUp";
 import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -35,28 +37,17 @@ const NavBar = () => {
     setShowMenu(false);
   };
 
+  const logout = () => {
+    dispatch(authActions.setLoading());
+
+    setTimeout(() => dispatch(authActions.logout()), 500);
+    navigate("/");
+  };
+
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      if (user) {
-        const accountMenu = document.querySelector(".account-menu");
-        const cart = document.querySelector(".cart-pop-up");
-
-        if (
-          showAccountMenu &&
-          !accountMenu.isEqualNode(e.target) &&
-          !accountMenu.contains(e.target)
-        ) {
-          setShowAccountMenu(false);
-        }
-
-        if (
-          showCart &&
-          !cart.isEqualNode(e.target) &&
-          !cart.contains(e.target)
-        ) {
-          setShowCart(false);
-        }
-      }
+      setShowAccountMenu(false);
+      setShowCart(false);
     });
 
     window.addEventListener("scroll", () => {
@@ -67,8 +58,6 @@ const NavBar = () => {
         nav.classList.remove("fixed");
       }
     });
-
-    //eslint-disable-next-line
   }, [user, showAccountMenu, showCart]);
 
   return (
@@ -120,7 +109,10 @@ const NavBar = () => {
             >
               <img src="image/cat-avt.jpeg" alt="" />
             </div>
-            <ul className={`account-menu ${showAccountMenu ? "show" : ""}`}>
+            <ul
+              onClick={(e) => e.stopPropagation()}
+              className={`account-menu ${showAccountMenu ? "show" : ""}`}
+            >
               <li
                 onClick={(e) => {
                   navigate("/account");
@@ -129,7 +121,7 @@ const NavBar = () => {
               >
                 My account
               </li>
-              <li>Log out</li>
+              <li onClick={logout}>Log out</li>
             </ul>
             <CartPopUp show={showCart} setShowCart={setShowCart} />
           </>

@@ -3,6 +3,7 @@ import {
   LOAD_USER,
   LOG_IN,
   LOG_IN_FAILED,
+  LOG_OUT,
   NOT_LOADED_YET,
   SET_LOADING,
   SIGN_UP,
@@ -51,6 +52,11 @@ const authActions = {
   setLoading() {
     return {
       type: SET_LOADING,
+    };
+  },
+  logout() {
+    return {
+      type: LOG_OUT,
     };
   },
 };
