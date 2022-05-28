@@ -1,6 +1,7 @@
 .container_newletter {
   height: 300px;
   background-color: #8db4f7;
+  border: 1px solid red;
 }
 .form_input {
   margin: 0 auto;
