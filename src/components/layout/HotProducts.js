@@ -1,26 +1,31 @@
-import { List, Card, Image, Button, Typography, Badge } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Badge, Button, Card, Image, List, Typography } from "antd";
 
 const data = [
   {
     title: "Voucher 1",
     img: "./image/voucher1.png",
+    price: "300k",
   },
   {
     title: "Voucher 2",
     img: "./image/voucher2.png",
+    price: "600k",
   },
   {
     title: "Voucher 3",
     img: "./image/voucher3.png",
+    price: "500k",
   },
   {
     title: "Voucher 4",
     img: "./image/voucher4.png",
+    price: "1100k",
   },
   {
     title: "Voucher 5",
     img: "./image/voucher1.png",
+    price: "920k",
   },
 ];
 
