@@ -4,7 +4,6 @@ import Product from "./Products";
 import HotProduct from "./HotProducts";
 import Voucher from "./Voucher";
 import News from "./News";
-import Newletter from "./Newletter";
 
 const Home = () => {
   return (
@@ -14,7 +13,6 @@ const Home = () => {
       <HotProduct />
       <Voucher />
       <News />
-      <Newletter />
     </div>
   );
 };

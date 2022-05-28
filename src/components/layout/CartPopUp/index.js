@@ -9,7 +9,7 @@ const CartPopUp = ({ show, setShowCart }) => {
   const navigate = useNavigate();
 
   const handlePushCheckout = () => {
-    navigate(`/`);
+    navigate(`/checkout`);
   };
   const handlePushCart = () => {
     navigate("/cart");
