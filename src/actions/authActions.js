@@ -1,11 +1,12 @@
 import {
+  GET_USER,
   LOAD_USER,
   LOG_IN,
   LOG_IN_FAILED,
-  LOG_IN_SUCCESS,
+  NOT_LOADED_YET,
+  SET_LOADING,
   SIGN_UP,
   SIGN_UP_FAILED,
-  SIGN_UP_SUCCESS,
 } from "./actionType";
 
 const authActions = {
@@ -26,16 +27,10 @@ const authActions = {
       type: LOAD_USER,
     };
   },
-  loginSuccess(info) {
+  getUser(user) {
     return {
-      type: LOG_IN_SUCCESS,
-      payload: info,
-    };
-  },
-  signupSuccess(token) {
-    return {
-      type: SIGN_UP_SUCCESS,
-      payload: token,
+      type: GET_USER,
+      payload: user,
     };
   },
   loginFailed() {
@@ -46,6 +41,16 @@ const authActions = {
   signUpFailed() {
     return {
       type: SIGN_UP_FAILED,
+    };
+  },
+  loadUserFailed() {
+    return {
+      type: NOT_LOADED_YET,
+    };
+  },
+  setLoading() {
+    return {
+      type: SET_LOADING,
     };
   },
 };

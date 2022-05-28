@@ -1,12 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import authActions from "./actions/authActions";
 import Layout from "./components/layout/Layout";
 import routes from "./routes/index";
 
 const App = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const role = user ? "user" : "guest";
+
+  useEffect(() => {
+    dispatch(authActions.loadUser());
+  }, [dispatch]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <BrowserRouter>
