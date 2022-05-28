@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import Home from "../components/layout/Home";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
@@ -18,8 +19,8 @@ const guestRoutesWithoutLayout = [
 
 const userRoutesWithLayout = [
   { path: "/", component: Home },
-  { path: "/register", component: Home },
-  { path: "/login", component: Home },
+  { path: "/register", component: () => <Navigate to="/" /> },
+  { path: "/login", component: () => <Navigate to="/" /> },
   { path: "/products", component: () => <p>Products</p> },
   { path: "/news", component: () => <p>News</p> },
   { path: "/aboutus", component: () => <p>About us</p> },

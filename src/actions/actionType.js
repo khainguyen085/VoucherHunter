@@ -7,3 +7,6 @@ export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const LOG_IN_FAILED = "LOG_IN_FAILED";
 export const SIGN_UP_FAILED = "SIGN_UP_FAILED";
 export const LOG_OUT = "LOG_OUT";
+export const GET_USER = "GET_USER";
+export const NOT_LOADED_YET = "NOT_LOADED_YET";
+export const SET_LOADING = "SET_LOADING";
