@@ -1,9 +1,9 @@
 import React from "react";
-import { Row, Card, Col } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 const News = () => {
   return (
-    <div className="page-wrapper">
-      <Row xs={1} md={4} className="g-4">
+    <div className="container">
+      <Row xs={1} md={4} className="g-4" style={{ padding: "10px" }}>
         {Array.from({ length: 8 }).map((_, idx) => (
           <Col>
             <Card>
