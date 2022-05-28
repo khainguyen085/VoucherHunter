@@ -1,11 +1,11 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import CartItem from "./CartItem";
 
 const ListCart = () => {
   const navigate = useNavigate();
-  const { cart, totalPrice } = useSelector((state) => state);
+  const { cart, totalPrice } = useSelector((state) => state.cart);
 
   return (
     <>
