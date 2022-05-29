@@ -2,7 +2,7 @@ import { all, call, delay, put, takeEvery } from "redux-saga/effects";
 import { LOAD_USER, LOG_IN, SIGN_UP } from "../actions/actionType";
 import authActions from "../actions/authActions";
 import API from "../services/api";
-import { setAuthToken } from "../services/axiosInstance";
+import { setAuthToken } from "../utils/setAuthToken";
 
 function* signupWork({ payload: userInfo }) {
   try {

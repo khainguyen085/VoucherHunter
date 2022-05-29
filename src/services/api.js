@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/api";
+const baseURL = "https://voucher-hunter.herokuapp.com/api";
 
 const API = {
   async loadUser() {
