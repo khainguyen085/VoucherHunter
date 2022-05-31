@@ -8,7 +8,7 @@ import SearchBar from "./SearchBar";
 const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -52,13 +52,15 @@ const NavBar = () => {
 
     window.addEventListener("scroll", () => {
       const nav = document.querySelector("nav");
-      if (window.scrollY > 90) {
-        nav.classList.add("fixed");
-      } else {
-        nav.classList.remove("fixed");
+      if (nav) {
+        if (window.scrollY > 90) {
+          nav.classList.add("fixed");
+        } else {
+          nav.classList.remove("fixed");
+        }
       }
     });
-  }, [user, showAccountMenu, showCart]);
+  }, [user, showAccountMenu, showCart, loading]);
 
   return (
     <nav>
