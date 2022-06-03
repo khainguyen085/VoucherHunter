@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 
 const CheckOut = () => {
+    const navigate = useNavigate();
     return (
         <div className="checkout_container">
             <div className="checkout-left">
@@ -29,7 +31,7 @@ const CheckOut = () => {
                 </div>
                 <div className="checkout-left_container">
                     <button className="btt-left active-color">Place order</button>
-                    <button className="btt-left no-color">Back to shipping</button>
+                    <button className="btt-left no-color" onClick={() => navigate("/")} >Back to shipping</button>
                 </div>
             </div>
             <div className="checkout-right">
@@ -41,7 +43,7 @@ const CheckOut = () => {
                     <p>Order total:  $325</p>
                     <p>Amount due: $415</p>
                     <button className="btt-left active-color">Place order</button>
-                    <button className="btt-left no-color">Back to shipping</button>
+                    <button className="btt-left no-color" onClick={() => navigate("/")}>Back to shipping</button>
                 </div>
                 <div className="checkout-right_bottom">
                     <h5>Shipping ( 1 item )</h5>

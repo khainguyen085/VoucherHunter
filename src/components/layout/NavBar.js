@@ -66,7 +66,9 @@ const NavBar = () => {
     <nav>
       <div className="nav-left">
         <i className="bi bi-list" onClick={openMenu}></i>
-        <img src="image/logo.png" alt="" onClick={() => navigate("/")} />
+        <div className="logo" onClick={() => navigate("/")} >
+            <p>Voucher HUNTER</p>
+        </div>
         <SearchBar />
       </div>
       <div className={`nav-middle ${showMenu ? "show" : ""}`}>
