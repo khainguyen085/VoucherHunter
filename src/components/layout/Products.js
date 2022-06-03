@@ -1,6 +1,13 @@
 import { List, Card, Image, Button, Typography } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-
+import { notification, Space } from 'antd';
+const openNotificationWithIcon = (type) => {
+  notification[type]({
+    message: 'Đã thêm vào giỏ hàng',
+    description:
+      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+  });
+};
 const data = [
   {
     title: "Voucher 1",
@@ -56,11 +63,13 @@ const { Title } = Typography;
 
 const styleColor = {
   padding: "10px",
-  color: "#8ec145",
+  color: "#91ad41",
+
 };
 
 export default () => (
   <div className="page-wrapper">
+
     <Title style={styleColor}>Products</Title>
     <List
       grid={{
@@ -75,7 +84,12 @@ export default () => (
           <Card
             title={item.title}
             actions={[
-              <ShoppingCartOutlined key="addToCart" />,
+
+              <Space>
+                <Button onClick={() => openNotificationWithIcon('success')}><ShoppingCartOutlined key="addToCart" /></Button>
+
+              </Space>
+              ,
               <Button type="primary">Buy</Button>,
             ]}
           >

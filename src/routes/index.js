@@ -1,4 +1,6 @@
 import Home from "../components/layout/Home";
+import News_router from "../components/layout/News_router";
+import Productdetails from "../components/layout/Productdetails";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
@@ -6,9 +8,10 @@ import SignUp from "../pages/SignUp";
 const guestRoutesWithLayout = [
   { path: "/", component: Home },
   { path: "/products", component: () => <p>Products</p> },
-  { path: "/news", component: () => <p>News</p> },
+  { path: "/news", component: News_router },
   { path: "/aboutus", component: () => <p>About us</p> },
   { path: "/product/:id", component: () => <p>Product detail</p> },
+  { path: "/productdetail", component: Productdetails },
 ];
 
 const guestRoutesWithoutLayout = [
@@ -21,9 +24,10 @@ const userRoutesWithLayout = [
   { path: "/register", component: Home },
   { path: "/login", component: Home },
   { path: "/products", component: () => <p>Products</p> },
-  { path: "/news", component: () => <p>News</p> },
+  { path: "/news", component: News_router },
   { path: "/aboutus", component: () => <p>About us</p> },
   { path: "/product/:id", component: () => <p>Product detail</p> },
+  { path: "/productdetail", component: Productdetails },
   { path: "/account", component: () => <p>Account</p> },
   { path: "/cart", component: Cart },
 ];
