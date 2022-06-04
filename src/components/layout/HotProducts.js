@@ -3,29 +3,29 @@ import { Badge, Button, Card, Image, List, Typography } from "antd";
 
 const data = [
   {
-    title: "Voucher 1",
-    img: "./image/voucher1.png",
-    price: "300k",
-  },
-  {
     title: "Voucher 2",
     img: "./image/voucher2.png",
-    price: "600k",
+    price: "60"
   },
   {
     title: "Voucher 3",
     img: "./image/voucher3.png",
-    price: "500k",
+    price: "100"
   },
   {
     title: "Voucher 4",
     img: "./image/voucher4.png",
-    price: "1100k",
+    price: "80"
   },
   {
     title: "Voucher 5",
     img: "./image/voucher1.png",
-    price: "920k",
+    price: "200"
+  },
+  {
+    title: "Voucher 6",
+    img: "./image/voucher2.png",
+    price: "50"
   },
 ];
 
@@ -36,6 +36,25 @@ const styleColor = {
   color: "#8ec145",
   display: "inline-block",
 };
+
+const cardColor = {
+  border: "1px solid silver",
+  borderRadius:"10px",
+  padding:"5px",
+  backgroundColor:"#ffb3c1",
+
+}
+
+const styleCart = {
+  backgroundColor:"white",
+  color:"black",
+  border:"1px solid white",
+  borderTopLeftRadius:"30px",
+  borderBottomLeftRadius:"30px",
+  borderBottomRightRadius:"30px",
+  borderTopRightRadius:"30px",
+  height:"30px",
+}
 
 const HotProducts = () => (
   <div className="page-wrapper">
@@ -52,9 +71,13 @@ const HotProducts = () => (
         <List.Item>
           <Badge.Ribbon text="HOT" color="red">
             <Card
+              style={cardColor}
               title={item.title}
               actions={[
-                <ShoppingCartOutlined key="addToCart" />,
+                <div style={styleCart} className="cart-container">
+                  <p>Add to cart</p>
+                  <ShoppingCartOutlined key="addToCart"/>
+                </div>,
                 <Button type="primary">Buy</Button>,
               ]}
             >
@@ -64,6 +87,7 @@ const HotProducts = () => (
                 alt="this is product img"
                 src={item.img}
               />
+              <h5>{item.price}$</h5>
             </Card>
           </Badge.Ribbon>
         </List.Item>

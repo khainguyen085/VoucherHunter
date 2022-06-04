@@ -3,7 +3,7 @@ nav {
   grid-template-columns: 30% 1fr 30%;
   align-items: center;
   justify-items: center;
-  padding: 12px 24px;
+  padding: 8px 20px;
   height: 64px;
   box-shadow: $box-shadow-1;
   background-color: #fff;
@@ -29,6 +29,21 @@ nav {
     gap: 12px;
     justify-self: start;
     align-items: center;
+
+    .logo{
+      cursor: pointer;
+      color: #ee964b;
+      margin-top: 10px; 
+      font-weight: 600;
+      margin-right:auto;
+      background-image: url("../../../public/image/logohunter1.png");
+      background-position-x: center;
+      background-position-y: bottom;
+      background-size: 50% 150%;
+      background-repeat: no-repeat;
+      text-shadow: 5px 5px 5px black, -2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+    }
+    
 
     @include custom-media(tablet) {
       grid-template-columns: auto auto 1fr;
@@ -56,6 +71,7 @@ nav {
       border-radius: 500px;
       padding: 8px 12px;
       column-gap: 8px;
+      margin-left: 20px;
 
       @include custom-media(tablet) {
         display: flex;
