@@ -1,4 +1,11 @@
-import { all, call, delay, put, takeEvery } from "redux-saga/effects";
+import {
+  all,
+  call,
+  delay,
+  put,
+  takeEvery,
+  takeLatest,
+} from "redux-saga/effects";
 import { LOAD_USER, LOG_IN, SIGN_UP } from "../actions/actionType";
 import authActions from "../actions/authActions";
 import API from "../services/api";
@@ -10,13 +17,13 @@ function* signupWork({ payload: userInfo }) {
     localStorage.token = token;
     yield put(authActions.loadUser());
   } catch (err) {
-    yield put(authActions.signUpFailed(err.message));
-    console.log(err.message);
+    yield put(authActions.signUpFailed(err.response?.data.msg));
+    console.log(err);
   }
 }
 
 function* signupWatch() {
-  yield takeEvery(SIGN_UP, signupWork);
+  yield takeLatest(SIGN_UP, signupWork);
 }
 
 function* loginWork({ payload: userInfo }) {
@@ -25,13 +32,13 @@ function* loginWork({ payload: userInfo }) {
     localStorage.token = token;
     yield put(authActions.loadUser());
   } catch (err) {
-    yield put(authActions.loginFailed(err.message));
-    console.log(err.message);
+    console.log(err.response?.data.msg);
+    yield put(authActions.loginFailed(err.response?.data.msg));
   }
 }
 
 function* loginWatch() {
-  yield takeEvery(LOG_IN, loginWork);
+  yield takeLatest(LOG_IN, loginWork);
 }
 
 function* loadUserWork() {
@@ -48,7 +55,7 @@ function* loadUserWork() {
     }
   } catch (err) {
     yield put(authActions.loadUserFailed());
-    console.log(err.message);
+    console.log(err);
   }
 }
 

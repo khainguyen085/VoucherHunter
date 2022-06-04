@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 html {
   box-sizing: border-box;
 }
@@ -14,14 +16,12 @@ html {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Circular Std", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
   margin: 0 auto;
 }
-
-
 
 ul {
   margin: 0px;
@@ -67,5 +67,3 @@ a {
     padding: 24px 24px;
   }
 }
-
-

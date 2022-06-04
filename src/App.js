@@ -15,7 +15,13 @@ const App = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="spinner-wrapper">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -26,10 +32,10 @@ const App = () => {
             <Route path={route.path} element={<route.component />} />
           ))}
         </Route>
-
         {routes[role].withoutLayout.map((route) => (
           <Route path={route.path} element={<route.component />} />
-        ))}lfg;pkvdvfbkg.e
+        ))}
+        lfg;pkvdvfbkg.e
         <Route path="*" element={<>Not found</>} />
       </Routes>
     </BrowserRouter>

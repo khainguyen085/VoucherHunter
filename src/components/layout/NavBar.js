@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import authActions from "../../actions/authActions";
+import ProfilePopup from "../ui/ProfilePopup";
 import CartPopUp from "./CartPopUp";
 import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -37,13 +36,6 @@ const NavBar = () => {
     setShowMenu(false);
   };
 
-  const logout = () => {
-    dispatch(authActions.setLoading());
-
-    setTimeout(() => dispatch(authActions.logout()), 500);
-    navigate("/");
-  };
-
   useEffect(() => {
     window.addEventListener("click", (e) => {
       setShowAccountMenu(false);
@@ -66,8 +58,8 @@ const NavBar = () => {
     <nav>
       <div className="nav-left">
         <i className="bi bi-list" onClick={openMenu}></i>
-        <div className="logo" onClick={() => navigate("/")} >
-            <p>Voucher HUNTER</p>
+        <div className="logo" onClick={() => navigate("/")}>
+          <p>Voucher HUNTER</p>
         </div>
         <SearchBar />
       </div>
@@ -113,20 +105,9 @@ const NavBar = () => {
             >
               <img src="image/cat-avt.jpeg" alt="" />
             </div>
-            <ul
-              onClick={(e) => e.stopPropagation()}
-              className={`account-menu ${showAccountMenu ? "show" : ""}`}
-            >
-              <li
-                onClick={(e) => {
-                  navigate("/account");
-                  toggleAccountMenu(e);
-                }}
-              >
-                My account
-              </li>
-              <li onClick={logout}>Log out</li>
-            </ul>
+
+            <ProfilePopup {...{ showAccountMenu, toggleAccountMenu }} />
+
             <CartPopUp show={showCart} setShowCart={setShowCart} />
           </>
         ) : (

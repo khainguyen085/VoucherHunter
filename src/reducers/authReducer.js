@@ -1,4 +1,5 @@
 import {
+  CLEAR_ERROR,
   GET_USER,
   LOG_IN_FAILED,
   LOG_OUT,
@@ -13,11 +14,12 @@ const inititalState = {
   error: null,
 };
 
-const cartReducer = (state = inititalState, action) => {
+const authReducer = (state = inititalState, action) => {
   switch (action.type) {
     case LOG_IN_FAILED:
     case SIGN_UP_FAILED:
       localStorage.removeItem("token");
+
       return {
         user: null,
         loading: false,
@@ -32,6 +34,7 @@ const cartReducer = (state = inititalState, action) => {
         ...state,
         user: null,
         loading: false,
+        error: null,
       };
 
     case GET_USER:
@@ -39,6 +42,13 @@ const cartReducer = (state = inititalState, action) => {
         ...state,
         user: action.payload,
         loading: false,
+        error: null,
+      };
+
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       };
 
     case SET_LOADING:
@@ -52,4 +62,4 @@ const cartReducer = (state = inititalState, action) => {
   }
 };
 
-export default cartReducer;
+export default authReducer;

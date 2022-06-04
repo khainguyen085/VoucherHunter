@@ -1,4 +1,5 @@
 import {
+  CLEAR_ERROR,
   GET_USER,
   LOAD_USER,
   LOG_IN,
@@ -34,14 +35,16 @@ const authActions = {
       payload: user,
     };
   },
-  loginFailed() {
+  loginFailed(err) {
     return {
       type: LOG_IN_FAILED,
+      payload: err,
     };
   },
-  signUpFailed() {
+  signUpFailed(err) {
     return {
       type: SIGN_UP_FAILED,
+      payload: err,
     };
   },
   loadUserFailed() {
@@ -57,6 +60,11 @@ const authActions = {
   logout() {
     return {
       type: LOG_OUT,
+    };
+  },
+  clearError() {
+    return {
+      type: CLEAR_ERROR,
     };
   },
 };

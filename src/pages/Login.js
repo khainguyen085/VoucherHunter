@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import authActions from "../actions/authActions";
@@ -19,11 +19,19 @@ const initialValues = {
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (values) => {
     const { email, password } = values;
+    if (error) {
+      dispatch(authActions.clearError());
+    }
+    setLoading(true);
 
-    dispatch(authActions.login({ email, password }));
+    new Promise((resolve) =>
+      resolve(dispatch(authActions.login({ email, password })))
+    ).then(() => setTimeout(() => setLoading(false), 500));
   };
 
   return (
@@ -36,6 +44,16 @@ const Login = () => {
           <div className="sign-up-form">
             <h2 className="title">Welcome Back</h2>
             <p>Log Into Your Account!</p>
+            {error && <p className="err-msg">{error}</p>}
+            {loading && (
+              <div
+                className="spinner-border"
+                style={{ marginBottom: "16px" }}
+                role="status"
+              >
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            )}
             <Formik
               initialValues={initialValues}
               onSubmit={handleSubmit}

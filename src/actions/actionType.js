@@ -10,3 +10,4 @@ export const LOG_OUT = "LOG_OUT";
 export const GET_USER = "GET_USER";
 export const NOT_LOADED_YET = "NOT_LOADED_YET";
 export const SET_LOADING = "SET_LOADING";
+export const CLEAR_ERROR = "CLEAR_ERROR";

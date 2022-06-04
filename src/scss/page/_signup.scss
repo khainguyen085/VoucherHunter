@@ -55,6 +55,12 @@
     box-shadow: -0.083333333in 0.5pc 1.125pc -7px rgba(25, 42, 70, 13%);
     background-color: #fff;
 
+    > p.err-msg {
+      padding: 4px 8px;
+      background-color: #ffeceb;
+      color: #ed2926;
+    }
+
     .title {
       font-size: 24px;
       font-weight: 600;
@@ -62,7 +68,12 @@
       margin-bottom: 17px;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
+      width: calc(70% - 30px);
+      padding: 50px 32px 30px;
+    }
+
+    @media (min-width: 1280px) {
       width: calc(50% - 30px);
       padding: 50px 32px 30px;
     }
@@ -268,4 +279,11 @@
   .sign-footer img {
     margin-right: 8px;
   }
+}
+
+.spinner-wrapper {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
 }
