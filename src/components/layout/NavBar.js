@@ -38,8 +38,12 @@ const NavBar = () => {
 
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      setShowAccountMenu(false);
-      setShowCart(false);
+      if (showAccountMenu) {
+        setShowAccountMenu(false);
+      }
+      if (showCart) {
+        setShowCart(false);
+      }
     });
 
     window.addEventListener("scroll", () => {
@@ -59,7 +63,7 @@ const NavBar = () => {
       <div className="nav-left">
         <i className="bi bi-list" onClick={openMenu}></i>
         <div className="logo" onClick={() => navigate("/")}>
-          <p>Voucher HUNTER</p>
+          <p className="mb-0">Voucher HUNTER</p>
         </div>
         <SearchBar />
       </div>
@@ -103,7 +107,7 @@ const NavBar = () => {
               className="avt-container"
               onClick={(e) => toggleAccountMenu(e)}
             >
-              <img src="image/cat-avt.jpeg" alt="" />
+              <img src={user?.avatar || "image/avt.png"} alt="" />
             </div>
 
             <ProfilePopup {...{ showAccountMenu, toggleAccountMenu }} />

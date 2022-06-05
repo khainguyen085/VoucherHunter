@@ -7,6 +7,10 @@
     border-color: #333 !important;
   }
 
+  .btn:focus {
+    box-shadow: none;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -38,6 +42,16 @@
     }
   }
 
+  .google-btn {
+    margin-bottom: 24px;
+    background-color: #ffeceb;
+
+    &:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+
   .logo-container {
     width: 135px;
     padding: 50px 0;
@@ -55,10 +69,22 @@
     box-shadow: -0.083333333in 0.5pc 1.125pc -7px rgba(25, 42, 70, 13%);
     background-color: #fff;
 
-    > p.err-msg {
+    .slogan {
+      padding-bottom: 32px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .slogan > p.err-msg {
       padding: 4px 8px;
       background-color: #ffeceb;
       color: #ed2926;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      text-align: center;
+      margin-bottom: 0;
+      transform: translateX(-50%);
     }
 
     .title {

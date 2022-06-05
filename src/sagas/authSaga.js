@@ -6,7 +6,12 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
-import { LOAD_USER, LOG_IN, SIGN_UP } from "../actions/actionType";
+import {
+  LOAD_USER,
+  LOGIN_GOOGLE,
+  LOG_IN,
+  SIGN_UP,
+} from "../actions/actionType";
 import authActions from "../actions/authActions";
 import API from "../services/api";
 import { setAuthToken } from "../utils/setAuthToken";
@@ -63,6 +68,22 @@ function* loadUserWatch() {
   yield takeEvery(LOAD_USER, loadUserWork);
 }
 
+function* loginGoogleWork({ payload: idToken }) {
+  try {
+    const token = yield call(API.googleLogin, idToken);
+    localStorage.token = token;
+    setAuthToken(token);
+    yield put(authActions.loadUser());
+  } catch (err) {
+    yield put(authActions.loginFailed(err.response?.data.msg));
+    console.log(err);
+  }
+}
+
+function* loginGoogleWatch() {
+  yield takeLatest(LOGIN_GOOGLE, loginGoogleWork);
+}
+
 export default function* authSagas() {
-  yield all([signupWatch(), loadUserWatch(), loginWatch()]);
+  yield all([signupWatch(), loadUserWatch(), loginWatch(), loginGoogleWatch()]);
 }

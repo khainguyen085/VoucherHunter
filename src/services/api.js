@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseURL = "https://voucher-hunter.herokuapp.com/api";
+// const baseURL = "https://voucher-hunter.herokuapp.com/api";
+const baseURL = "http://localhost:8080/api";
 
 const API = {
   async loadUser() {
@@ -28,6 +29,15 @@ const API = {
   },
   async login(loginInfo) {
     const response = await axios.post(`${baseURL}/auth`, loginInfo);
+
+    if (response.status !== 200) {
+      throw new Error(response.data.msg);
+    }
+
+    return response.data;
+  },
+  async googleLogin(idToken) {
+    const response = await axios.post(`${baseURL}/auth/google`, { idToken });
 
     if (response.status !== 200) {
       throw new Error(response.data.msg);

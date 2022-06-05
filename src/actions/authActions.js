@@ -2,6 +2,7 @@ import {
   CLEAR_ERROR,
   GET_USER,
   LOAD_USER,
+  LOGIN_GOOGLE,
   LOG_IN,
   LOG_IN_FAILED,
   LOG_OUT,
@@ -65,6 +66,12 @@ const authActions = {
   clearError() {
     return {
       type: CLEAR_ERROR,
+    };
+  },
+  loginGoogle(idToken) {
+    return {
+      type: LOGIN_GOOGLE,
+      payload: idToken,
     };
   },
 };

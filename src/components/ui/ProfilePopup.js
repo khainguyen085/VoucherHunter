@@ -22,7 +22,7 @@ const ProfilePopup = ({ showAccountMenu, toggleAccountMenu }) => {
     >
       <div className="profile__info">
         <div className="avt-container">
-          <img src="image/cat-avt.jpeg" alt="" />
+          <img src={user?.avatar || "image/avt.png"} alt="" />
         </div>
         <div className="profile-info__txt">
           <p>{user.fullName}</p>
