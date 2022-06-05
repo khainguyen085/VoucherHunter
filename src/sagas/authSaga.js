@@ -70,10 +70,12 @@ function* loadUserWatch() {
 
 function* loginGoogleWork({ payload: idToken }) {
   try {
+    yield put(authActions.setLoading());
     const token = yield call(API.googleLogin, idToken);
     localStorage.token = token;
     setAuthToken(token);
-    yield put(authActions.loadUser());
+    const user = yield call(API.loadUser);
+    yield put(authActions.getUser(user));
   } catch (err) {
     yield put(authActions.loginFailed(err.response?.data.msg));
     console.log(err);
