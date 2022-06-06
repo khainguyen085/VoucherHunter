@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -29,6 +29,10 @@ const Login = () => {
     }
     dispatch(authActions.login({ email, password }));
   };
+
+  useEffect(() => {
+    return () => dispatch(authActions.clearError());
+  }, [dispatch]);
 
   return (
     <div className="sign-up-bg">

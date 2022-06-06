@@ -70,7 +70,6 @@
     background-color: #fff;
 
     .slogan {
-      padding-bottom: 32px;
       margin-bottom: 18px;
       position: relative;
     }
@@ -79,12 +78,8 @@
       padding: 4px 8px;
       background-color: #ffeceb;
       color: #ed2926;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
       text-align: center;
       margin-bottom: 0;
-      transform: translateX(-50%);
     }
 
     .title {
