@@ -12,3 +12,4 @@ export const NOT_LOADED_YET = "NOT_LOADED_YET";
 export const SET_LOADING = "SET_LOADING";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const LOGIN_GOOGLE = "LOGIN_GOOGLE";
+export const SET_LOADING_FORM = "SET_LOADING_FORM";

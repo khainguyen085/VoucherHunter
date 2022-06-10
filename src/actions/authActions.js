@@ -8,6 +8,7 @@ import {
   LOG_OUT,
   NOT_LOADED_YET,
   SET_LOADING,
+  SET_LOADING_FORM,
   SIGN_UP,
   SIGN_UP_FAILED,
 } from "./actionType";
@@ -72,6 +73,11 @@ const authActions = {
     return {
       type: LOGIN_GOOGLE,
       payload: idToken,
+    };
+  },
+  setLoadingForm() {
+    return {
+      type: SET_LOADING_FORM,
     };
   },
 };

@@ -5,6 +5,7 @@ import {
   LOG_OUT,
   NOT_LOADED_YET,
   SET_LOADING,
+  SET_LOADING_FORM,
   SIGN_UP_FAILED,
 } from "../actions/actionType";
 
@@ -12,6 +13,7 @@ const inititalState = {
   user: null,
   loading: true,
   error: null,
+  loadingForm: false,
 };
 
 const authReducer = (state = inititalState, action) => {
@@ -23,9 +25,14 @@ const authReducer = (state = inititalState, action) => {
       return {
         user: null,
         loading: false,
+        loadingForm: false,
         error: action.payload,
       };
-
+    case SET_LOADING_FORM:
+      return {
+        ...state,
+        loadingForm: true,
+      };
     case LOG_OUT:
     case NOT_LOADED_YET:
       localStorage.removeItem("token");
@@ -42,6 +49,7 @@ const authReducer = (state = inititalState, action) => {
         ...state,
         user: action.payload,
         loading: false,
+        loadingForm: false,
         error: null,
       };
 

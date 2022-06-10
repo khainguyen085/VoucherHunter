@@ -58,6 +58,9 @@ const NavBar = () => {
     });
   }, [user, showAccountMenu, showCart, loading]);
 
+  const avtDefault =
+    "https://gambolthemes.net/html-items/cursus_main_demo/images/left-imgs/img-2.jpg";
+
   return (
     <nav>
       <div className="nav-left">
@@ -107,7 +110,7 @@ const NavBar = () => {
               className="avt-container"
               onClick={(e) => toggleAccountMenu(e)}
             >
-              <img src={user?.avatar || "image/avt.png"} alt="" />
+              <img src={user?.avatar || avtDefault} alt="" />
             </div>
 
             <ProfilePopup {...{ showAccountMenu, toggleAccountMenu }} />

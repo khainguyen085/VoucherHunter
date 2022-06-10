@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import authActions from "../actions/authActions";
@@ -28,10 +28,20 @@ const initialValues = {
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { error, loadingForm } = useSelector((state) => state.auth);
 
   const handleSubmit = (values) => {
-    dispatch(authActions.signup(values));
+    dispatch(authActions.setLoadingForm(true));
+    if (error) {
+      dispatch(authActions.clearError());
+    }
+
+    setTimeout(() => dispatch(authActions.signup(values)), 500);
   };
+
+  useEffect(() => {
+    return () => dispatch(authActions.clearError());
+  }, [dispatch]);
 
   return (
     <div className="sign-up-bg">
@@ -42,7 +52,10 @@ const SignUp = () => {
           </div>
           <div className="sign-up-form">
             <h2 className="title">Welcome to Cursus</h2>
-            <p>Sign Up and Start Shopping!</p>
+            <div className="slogan">
+              <p>Sign Up and Start Shopping!</p>
+              {error && <p className="err-msg">{error}</p>}
+            </div>
             <Formik
               initialValues={initialValues}
               onSubmit={handleSubmit}
@@ -102,7 +115,13 @@ const SignUp = () => {
                     className={`btn text-center w-100 submit-btn`}
                     type="submit"
                   >
-                    Sign up
+                    {loadingForm ? (
+                      <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    ) : (
+                      "Sign Up"
+                    )}
                   </button>
                 </Form>
               )}

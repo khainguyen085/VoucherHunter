@@ -308,3 +308,18 @@
   display: grid;
   place-items: center;
 }
+
+.spinner-wrapper .spinner-border {
+  height: 2rem;
+  width: 2rem;
+}
+
+.submit-btn {
+  display: grid;
+  place-items: center;
+}
+
+.submit-btn .spinner-border {
+  height: 1rem;
+  width: 1rem;
+}

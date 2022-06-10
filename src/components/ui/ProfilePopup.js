@@ -15,6 +15,9 @@ const ProfilePopup = ({ showAccountMenu, toggleAccountMenu }) => {
     navigate("/login");
   };
 
+  const avtDefault =
+    "https://gambolthemes.net/html-items/cursus_main_demo/images/left-imgs/img-2.jpg";
+
   return (
     <div
       className={`profile-pop-up${showAccountMenu ? " show" : ""}`}
@@ -22,7 +25,7 @@ const ProfilePopup = ({ showAccountMenu, toggleAccountMenu }) => {
     >
       <div className="profile__info">
         <div className="avt-container">
-          <img src={user?.avatar || "image/avt.png"} alt="" />
+          <img src={user?.avatar || avtDefault} alt="" />
         </div>
         <div className="profile-info__txt">
           <p>{user.fullName}</p>
