@@ -115,6 +115,7 @@ const Products = () => {
         renderItem={(item) => (
           <List.Item>
             <Card
+              key={item.id}
               style={cardColor}
               title={item.title}
               actions={[
