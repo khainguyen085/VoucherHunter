@@ -20,14 +20,17 @@ const initialValues = {
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.auth);
-
+  const { error, loadingForm } = useSelector((state) => state.auth);
+  console.log(loadingForm);
   const handleSubmit = (values) => {
     const { email, password } = values;
+    dispatch(authActions.setLoadingForm());
+
     if (error) {
       dispatch(authActions.clearError());
     }
-    dispatch(authActions.login({ email, password }));
+
+    setTimeout(() => dispatch(authActions.login({ email, password })), 500);
   };
 
   useEffect(() => {
@@ -93,7 +96,13 @@ const Login = () => {
                     className={`btn text-center w-100 submit-btn`}
                     type="submit"
                   >
-                    Log in
+                    {loadingForm ? (
+                      <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    ) : (
+                      "Sign In"
+                    )}
                   </button>
                 </Form>
               )}

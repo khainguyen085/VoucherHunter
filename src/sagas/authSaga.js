@@ -18,12 +18,14 @@ import { setAuthToken } from "../utils/setAuthToken";
 
 function* signupWork({ payload: userInfo }) {
   try {
-    const token = yield call(API.signup, userInfo);
+    const { token, user } = yield call(API.signup, userInfo);
     localStorage.token = token;
-    yield put(authActions.loadUser());
+    yield put(authActions.setLoading());
+    yield delay(500);
+    yield put(authActions.getUser(user));
   } catch (err) {
     yield put(authActions.signUpFailed(err.response?.data.msg));
-    console.log(err);
+    console.log(err.response?.data.msg);
   }
 }
 
@@ -33,11 +35,15 @@ function* signupWatch() {
 
 function* loginWork({ payload: userInfo }) {
   try {
-    const token = yield call(API.login, userInfo);
+    const { token, user } = yield call(API.login, userInfo);
     localStorage.token = token;
-    yield put(authActions.loadUser());
+    yield put(authActions.setLoading());
+    yield delay(500);
+    delete user.password;
+    yield put(authActions.getUser(user));
+    console.log(user);
   } catch (err) {
-    console.log(err.response?.data.msg);
+    console.log(err);
     yield put(authActions.loginFailed(err.response?.data.msg));
   }
 }
@@ -52,8 +58,7 @@ function* loadUserWork() {
     if (token) {
       setAuthToken(token);
       const user = yield call(API.loadUser);
-      yield put(authActions.setLoading());
-      yield delay(500);
+      delete user.password;
       yield put(authActions.getUser(user));
     } else {
       yield put(authActions.loadUserFailed());
@@ -71,10 +76,10 @@ function* loadUserWatch() {
 function* loginGoogleWork({ payload: idToken }) {
   try {
     yield put(authActions.setLoading());
-    const token = yield call(API.googleLogin, idToken);
+    const { token, user } = yield call(API.googleLogin, idToken);
+    delete user.password;
     localStorage.token = token;
     setAuthToken(token);
-    const user = yield call(API.loadUser);
     yield put(authActions.getUser(user));
   } catch (err) {
     yield put(authActions.loginFailed(err.response?.data.msg));
