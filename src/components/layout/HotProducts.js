@@ -1,33 +1,17 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Button, Card, Image, List, Typography } from "antd";
+import { Badge, Button, Card, Image, List, notification, Typography } from "antd";
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-const data = [
-  {
-    title: "Voucher 2",
-    img: "./image/voucher2.png",
-    price: "60"
-  },
-  {
-    title: "Voucher 3",
-    img: "./image/voucher3.png",
-    price: "100"
-  },
-  {
-    title: "Voucher 4",
-    img: "./image/voucher4.png",
-    price: "80"
-  },
-  {
-    title: "Voucher 5",
-    img: "./image/voucher1.png",
-    price: "200"
-  },
-  {
-    title: "Voucher 6",
-    img: "./image/voucher2.png",
-    price: "50"
-  },
-];
+const openNotificationWithIcon = (type) => {
+  notification[type]({
+    message: "Đã thêm vào giỏ hàng",
+    description:
+    "Hãy tiếp tục mua sắm hoặc bấm checkout trong phần giỏ hàng để thanh toán ngay nhé!"
+  });
+};
+
+
 
 const { Title } = Typography;
 
@@ -39,61 +23,78 @@ const styleColor = {
 
 const cardColor = {
   border: "1px solid silver",
-  borderRadius:"10px",
-  padding:"5px",
-  backgroundColor:"#ffb3c1",
+  borderRadius: "10px",
+  padding: "5px",
+  backgroundColor: "#ffb3c1",
 
 }
 
 const styleCart = {
-  backgroundColor:"white",
-  color:"black",
-  border:"1px solid white",
-  borderTopLeftRadius:"30px",
-  borderBottomLeftRadius:"30px",
-  borderBottomRightRadius:"30px",
-  borderTopRightRadius:"30px",
-  height:"30px",
+  backgroundColor: "white",
+  color: "black",
+  border: "1px solid white",
+  borderTopLeftRadius: "30px",
+  borderBottomLeftRadius: "30px",
+  borderBottomRightRadius: "30px",
+  borderTopRightRadius: "30px",
+  height: "30px",
 }
 
-const HotProducts = () => (
-  <div className="page-wrapper">
-    <Title style={styleColor}>Hot Products</Title>
-    <List
-      grid={{
-        gutter: 24,
-        xs: 1,
-        sm: 2,
-        column: 4,
-      }}
-      dataSource={data}
-      renderItem={(item) => (
-        <List.Item>
-          <Badge.Ribbon text="HOT" color="red">
-            <Card
-              style={cardColor}
-              title={item.title}
-              actions={[
-                <div style={styleCart} className="cart-container">
-                  <p>Add to cart</p>
-                  <ShoppingCartOutlined key="addToCart"/>
-                </div>,
-                <Button type="primary">Buy</Button>,
-              ]}
-            >
-              <Image
-                width="100%"
-                height={150}
-                alt="this is product img"
-                src={item.img}
-              />
-              <h5>{item.price}$</h5>
-            </Card>
-          </Badge.Ribbon>
-        </List.Item>
-      )}
-    />
-  </div>
-);
+const HotProducts = () => {
+  const navigate = useNavigate();
+  const [cards, setCards] = useState([]);
+
+  const fetchCard = async () => {
+  const response = await fetch(
+      "https://voucher-hunter.herokuapp.com/api/product/all"
+    );
+   const data = await response.json();
+    setCards(data.products);
+  };
+
+  useEffect(() => {
+    fetchCard();
+  }, []);
+  return (
+    <div className="page-wrapper">
+      <Title style={styleColor}>Hot Products</Title>
+      <List
+        grid={{
+          gutter: 24,
+          xs: 1,
+          sm: 2,
+          column: 4,
+        }}
+        dataSource={cards}
+        renderItem={(item) => (
+          <List.Item>
+            <Badge.Ribbon text="HOT" color="red">
+              <Card
+                key={item._id}
+                style={cardColor}
+                title={item.name}
+                actions={[
+                  <div style={styleCart} className="cart-container" onClick={() => openNotificationWithIcon("success")}>
+                    <p>Add to cart</p>
+                    <ShoppingCartOutlined key="addToCart" />
+                  </div>,
+                  <Button type="primary">Buy</Button>,
+                ]}
+              >
+                <Image
+                  width="100%"
+                  height={150}
+                  alt="this is product img"
+                  src={item.images[0]}
+                />
+                <h5>{Intl.NumberFormat().format(item.price)}VNĐ</h5>
+              </Card>
+            </Badge.Ribbon>
+          </List.Item>
+        )}
+      />
+    </div>
+  )
+}
 
 export default HotProducts;

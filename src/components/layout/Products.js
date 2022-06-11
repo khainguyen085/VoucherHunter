@@ -1,76 +1,17 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Card, Image, List, notification, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from 'react';
 
 const openNotificationWithIcon = (type) => {
   notification[type]({
     message: "Đã thêm vào giỏ hàng",
     description:
-      "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+    "Hãy tiếp tục mua sắm hoặc bấm checkout trong phần giỏ hàng để thanh toán ngay nhé!"
   });
 };
-const data = [
-  {
-    title: "Voucher 1",
-    img: "./image/voucher1.png",
-    price: "300",
-  },
-  {
-    title: "Voucher 2",
-    img: "./image/voucher2.png",
-    price: "295",
-  },
-  {
-    title: "Voucher 3",
-    img: "./image/voucher3.png",
-    price: "500",
-  },
-  {
-    title: "Voucher 4",
-    img: "./image/voucher4.png",
-    price: "120",
-  },
-  {
-    title: "Voucher 5",
-    img: "./image/voucher1.png",
-    price: "220",
-  },
-  {
-    title: "Voucher 6",
-    img: "./image/voucher2.png",
-    price: "400",
-  },
-  {
-    title: "Voucher 1",
-    img: "./image/voucher1.png",
-    price: "520",
-  },
-  {
-    title: "Voucher 2",
-    img: "./image/voucher2.png",
-    price: "60",
-  },
-  {
-    title: "Voucher 3",
-    img: "./image/voucher3.png",
-    price: "100",
-  },
-  {
-    title: "Voucher 4",
-    img: "./image/voucher4.png",
-    price: "80",
-  },
-  {
-    title: "Voucher 5",
-    img: "./image/voucher1.png",
-    price: "200",
-  },
-  {
-    title: "Voucher 6",
-    img: "./image/voucher2.png",
-    price: "50",
-  },
-];
+
+
 
 const { Title } = Typography;
 
@@ -100,6 +41,19 @@ const styleCart = {
 
 const Products = () => {
   const navigate = useNavigate();
+  const [cards, setCards] = useState([]);
+
+  const fetchCard = async () => {
+  const response = await fetch(
+      "https://voucher-hunter.herokuapp.com/api/product/all"
+    );
+   const data = await response.json();
+    setCards(data.products);
+  };
+
+  useEffect(() => {
+    fetchCard();
+  }, []);
 
   return (
     <div className="page-wrapper">
@@ -111,19 +65,18 @@ const Products = () => {
           sm: 2,
           column: 4,
         }}
-        dataSource={data}
+        dataSource={cards}
         renderItem={(item) => (
           <List.Item>
             <Card
-              key={item.id}
+              key={item._id}
               style={cardColor}
-              title={item.title}
+              title={item.name}
               actions={[
-                <div style={styleCart} className="cart-container">
+                <div style={styleCart} className="cart-container" onClick={() => openNotificationWithIcon("success")}>
                   <p>Add to cart</p>
                   <ShoppingCartOutlined
-                    key="addToCart"
-                    onClick={() => openNotificationWithIcon("success")}
+                    key="addToCart"                  
                   />
                 </div>,
                 <Button type="primary" onClick={() => navigate("/checkout")}>
@@ -135,9 +88,9 @@ const Products = () => {
                 width={"100%"}
                 height={150}
                 alt="this is product img"
-                src={item.img}
+                src={item.images[0]}
               />
-              <h5>{item.price}$</h5>
+              <h5>{Intl.NumberFormat().format(item.price)}VNĐ</h5>
             </Card>
           </List.Item>
         )}
