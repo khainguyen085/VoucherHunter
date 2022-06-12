@@ -3,9 +3,7 @@ import {
   GET_USER,
   LOG_IN_FAILED,
   LOG_OUT,
-  NOT_LOADED_YET,
-  SET_LOADING,
-  SET_LOADING_FORM,
+  NOT_LOADED_YET, RECEIVE_ADDRESS, SET_LOADING, SET_LOADING_ADDRESS_FORM, SET_LOADING_FORM,
   SIGN_UP_FAILED
 } from "../actions/actionType";
 
@@ -14,6 +12,8 @@ const inititalState = {
   loading: true,
   error: null,
   loadingForm: false,
+  billingAddress: null,
+  billingAddressForm: false
 };
 
 const authReducer = (state = inititalState, action) => {
@@ -64,6 +64,19 @@ const authReducer = (state = inititalState, action) => {
         ...state,
         loading: true,
       };
+
+    case RECEIVE_ADDRESS:
+      return {
+        ...state,
+        billingAddress: action.payload,
+        loadingAddressForm: false,
+      }
+
+    case SET_LOADING_ADDRESS_FORM:
+      return {
+        ...state,
+        loadingAddressForm: action.payload
+      }
 
     default:
       return state;

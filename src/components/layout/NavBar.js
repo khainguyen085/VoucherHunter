@@ -1,3 +1,4 @@
+import { Badge } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -103,12 +104,9 @@ const NavBar = () => {
       <div className="nav-right">
         {user ? (
           <>
-            <div className="cart-notification" onClick={(e) => toggleShowCart(e)}>
-              <i
-                className="bi bi-bag-heart"
-              ></i>
-              <span className="notification-label">{totalQuantity}</span>
-            </div>
+            <Badge count={totalQuantity} onClick={(e) => toggleShowCart(e)}>
+              <i className="bi bi-bag-heart"></i>
+            </Badge>
             <div
               className="avt-container"
               onClick={(e) => toggleAccountMenu(e)}

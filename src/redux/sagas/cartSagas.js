@@ -11,7 +11,7 @@ import {
 import cartAction from "../actions/cartActions";
 
 notification.config({
-  placement: "topRight",
+  placement: "top",
   top: 50,
   duration: 2,
   rtl: false,

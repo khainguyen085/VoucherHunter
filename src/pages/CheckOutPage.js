@@ -9,7 +9,7 @@ import cartAction from "../redux/actions/cartActions";
 const { Panel } = Collapse;
 
 const CheckOutPage = () => {
-  const {orderSuccess, cart} = useSelector(state => state.cart);
+  const {orderSuccess, cart, loading} = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const CheckOutPage = () => {
     return <OrderSuccess />
   }
 
-  if (!cart.length ) {
+  if (!cart.length && !loading) {
     return <Navigate to="/cart" />
   }
   

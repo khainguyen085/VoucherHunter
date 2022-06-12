@@ -1,16 +1,16 @@
 import {
   CLEAR_ERROR,
   GET_USER,
+  LOAD_ADDRESS,
   LOAD_USER,
   LOGIN_GOOGLE,
   LOG_IN,
   LOG_IN_FAILED,
   LOG_OUT,
   NOT_LOADED_YET,
-  SET_LOADING,
-  SET_LOADING_FORM,
+  POST_ADDRESS, RECEIVE_ADDRESS, SET_LOADING, SET_LOADING_ADDRESS_FORM, SET_LOADING_FORM,
   SIGN_UP,
-  SIGN_UP_FAILED,
+  SIGN_UP_FAILED
 } from "./actionType";
 
 const authActions = {
@@ -80,6 +80,29 @@ const authActions = {
       type: SET_LOADING_FORM,
     };
   },
+  loadAddress() {
+    return {
+      type: LOAD_ADDRESS,
+    }
+  },
+  addAddress(info) {
+    return {
+      type: POST_ADDRESS,
+      payload: info
+    }
+  },
+  receiveAddress(info) {
+    return {
+      type: RECEIVE_ADDRESS,
+      payload: info
+    }
+  },
+  setLoadingAddressForm(status) {
+    return {
+      type: SET_LOADING_ADDRESS_FORM,
+      payload: status
+    }
+  }
 };
 
 export default authActions;

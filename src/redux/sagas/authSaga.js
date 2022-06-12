@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import {
   all,
   call,
@@ -9,10 +10,10 @@ import {
 import API from "../../services/api";
 import { setAuthToken } from "../../utils/setAuthToken";
 import {
+  LOAD_ADDRESS,
   LOAD_USER,
   LOGIN_GOOGLE,
-  LOG_IN,
-  SIGN_UP
+  LOG_IN, POST_ADDRESS, SIGN_UP
 } from "../actions/actionType";
 import authActions from "../actions/authActions";
 
@@ -90,6 +91,44 @@ function* loginGoogleWatch() {
   yield takeLatest(LOGIN_GOOGLE, loginGoogleWork);
 }
 
+function* loadAddressWorker() {
+  try {
+    const data = yield call(API.getAddress);
+    yield put(authActions.receiveAddress(data.address));
+  } catch (err) {
+    yield put(authActions.receiveAddress(null));
+    console.log(err);
+  }
+}
+
+function* loadAddressWatcher() {
+  yield takeEvery(LOAD_ADDRESS, loadAddressWorker);
+}
+
+function* addAddressWorker({payload}) {
+  console.log(payload)
+  try {
+    const addressInfo = yield call(API.addAddress, payload);
+    yield delay(500)
+    yield put(authActions.receiveAddress(addressInfo));
+    notification.success({message: "Added address successfully!"})
+  } catch (err) {
+    yield put(authActions.receiveAddress(null));
+    notification.error({message: err.response?.data?.message || err.message})
+  }
+}
+
+function* addAddressWatcher() {
+  yield takeEvery(POST_ADDRESS, addAddressWorker);
+}
+
 export default function* authSagas() {
-  yield all([signupWatch(), loadUserWatch(), loginWatch(), loginGoogleWatch()]);
+  yield all([
+    signupWatch(),
+    loadUserWatch(),
+    loginWatch(),
+    loginGoogleWatch(),
+    loadAddressWatcher(),
+    addAddressWatcher()
+  ]);
 }

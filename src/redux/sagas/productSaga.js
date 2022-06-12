@@ -7,7 +7,7 @@ import {
 import productActions from "../actions/productAction";
 
 notification.config({
-  placement: "topRight",
+  placement: "top",
   bottom: 50,
   duration: 2,
   rtl: false,

@@ -10,6 +10,7 @@ const initialState = {
   totalQuantity: 0,
   changed: false,
   orderSuccess: false,
+  loading: true,
   loadingOrder: false,
 };
 
@@ -23,6 +24,7 @@ const cartReducer = (state = initialState, action) => {
         totalPrice,
         totalQuantity,
         changed: false,
+        loading: false,
       };
     case CHANGE_CART:
       return {

@@ -22,24 +22,26 @@ const CustomSelector = ({
     setFilterOptions(selectOptions);
   }, [selectOptions]);
 
-  const handleClick = (e, item, index) => {
+  const handleClick = (e, item) => {
     e.stopPropagation();
     setInputValue("");
-    setSelected(item);
     setFieldValue(name, item);
     setShowOptions(false);
     inputRef.current.focus();
-
-    if (name === "city") {
-      setDistrictSelectOptions(index)
-    }
   };
+
+  useEffect(() => {
+    if (value) {
+      setSelected(value)
+    }
+  }, [value, name, setDistrictSelectOptions])
 
   const toggleSelect = (e) => {
     e.stopPropagation();
     new Promise((resolve) => resolve(setShowOptions(true))).then(() =>
       inputRef.current.focus()
     );
+    console.log(showOptions);
     if (!isTouched) {
       setIsTouched(true);
     }
@@ -117,7 +119,7 @@ const CustomSelector = ({
             <div
               key={`${name}-${index}`}
               className={option === selected ? "same-as-selected" : ""}
-              onClick={(e) => handleClick(e, option, index)}
+              onClick={(e) => handleClick(e, option)}
             >
               {option}
             </div>

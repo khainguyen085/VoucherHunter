@@ -47,7 +47,7 @@ const productReducer = (state = initialState, action) => {
       };
 
     case CHANGE_PAGE:
-      
+
       return {
         ...state,
         page: action.payload.page,

@@ -1,15 +1,20 @@
+import { notification } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import cartAction from "../../redux/actions/cartActions";
 import CartItem from './CartItem';
 
 const CartContainer = () => {
-  const {user} = useSelector(state => state.auth)
+  const {user, billingAddress} = useSelector(state => state.auth)
   const { cart, totalPrice, loadingOrder } = useSelector(state => state.cart);
   const dispatch = useDispatch()
 
   const placeOrder = () => {
+    if (!billingAddress) {
+      notification.error({message: "Please enter and save your address before submitting"});
+      return;
+    }
     dispatch(cartAction.setLoadingOrder(true));
-    dispatch(cartAction.placeOrder({cart, userId: user._id, totalPrice}))
+    dispatch(cartAction.placeOrder({cart, userId: user._id, totalPrice, information: billingAddress}))
   }
 
   return (

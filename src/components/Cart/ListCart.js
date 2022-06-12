@@ -25,7 +25,7 @@ const ListCart = () => {
       <div className="button-container">
         <button
           className="btn btn-primary"
-          onClick={() => navigate(`/checkouts/id?step=contact_information`)}
+          onClick={() => navigate(`/checkout`)}
         >
           Checkout
         </button>

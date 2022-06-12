@@ -9,9 +9,7 @@ const ProductPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
       dispatch(productAction.loadProductList({page: 1, size: 10}))
-
   }, [dispatch])
 
   const onChange = (page, pageSize) => {
@@ -21,7 +19,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     if (changed) {
-      dispatch(productAction.loadProductList(page, size, search, sortBy, order))
+      dispatch(productAction.loadProductList({page, size, search, sortBy, order}))
     }
   }, [dispatch, changed, page, size, search, sortBy, order]);
 
