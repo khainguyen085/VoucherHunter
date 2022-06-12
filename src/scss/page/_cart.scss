@@ -75,10 +75,9 @@
 
   .list-cart__wrapper {
     width: 100%;
+    overflow-x: auto;
 
     @include custom-media(tablet-large) {
-      overflow-x: scroll;
-
       &::-webkit-scrollbar {
         height: 2px;
       }
@@ -101,7 +100,8 @@
 
     .list-cart__container {
       max-height: 100vh;
-      overflow-y: scroll;
+      overflow-y: auto;
+      min-width: 992px;
 
       &::-webkit-scrollbar {
         width: 4px;
@@ -125,8 +125,6 @@
       p {
         margin-bottom: 0;
       }
-
-      min-width: 992px;
 
       .product-info {
         display: grid;
@@ -156,25 +154,25 @@
 
         .quantity-input {
           input {
-            width: 45px;
-            height: 45px;
+            width: 32px;
+            height: 32px;
             text-align: center;
             border: 1px solid #e9e9e9;
           }
 
           button {
-            width: 45px;
-            height: 45px;
+            width: 32px;
+            height: 32px;
             text-align: center;
 
             &:first-child {
-              border-radius: 500px 0 0 500px;
+              border-radius: 5px 0 0 5px;
               border-right: none;
               border: 1px solid #e9e9e9;
             }
 
             &:last-child {
-              border-radius: 0 500px 500px 0;
+              border-radius: 0 5px 5px 0;
               border-left: none;
               border: 1px solid #e9e9e9;
             }
@@ -250,7 +248,7 @@
 
     .btn:focus,
     .btn-primary:focus {
-      box-shadow: none;
+      box-shadow: none !important;
     }
 
     @include custom-media(mobile) {
@@ -340,5 +338,50 @@
     &::after {
       display: none;
     }
+  }
+}
+
+.list-cart__wrapper {
+  .list-cart__container {
+    position: relative;
+    .product-info.product-title {
+      position: sticky;
+      z-index: 5;
+      top: 0
+    }
+  }
+}
+
+.cart-notification {
+  position: relative;
+  .notification-label {
+    position: absolute;
+    top: -4px;
+    right: -10px;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background-color: $primary;
+    display: grid;
+    place-items: center;
+    color: #fff;
+  }
+}
+
+.origin-price {
+  color: #d4d4d4;
+  text-decoration: line-through;
+}
+
+.submit-btn {
+  background-color: $primary;
+  padding: 8px 16px;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #000;
   }
 }

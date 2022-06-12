@@ -1,7 +1,6 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import authActions from "../../actions/authActions";
+import authActions from "../../redux/actions/authActions";
 
 const ProfilePopup = ({ showAccountMenu, toggleAccountMenu }) => {
   const { user } = useSelector((state) => state.auth);

@@ -67,3 +67,23 @@ a {
     padding: 24px 24px;
   }
 }
+
+.btn-primary {
+  color: #fff !important;
+}
+
+.d-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;  
+}
+
+@media (min-width: 992px) {
+  .d-grid-2 {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+  }
+}
+
+.ant-pagination-item-active:hover {
+  border-color: $primary;
+}

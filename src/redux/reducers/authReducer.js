@@ -6,7 +6,7 @@ import {
   NOT_LOADED_YET,
   SET_LOADING,
   SET_LOADING_FORM,
-  SIGN_UP_FAILED,
+  SIGN_UP_FAILED
 } from "../actions/actionType";
 
 const inititalState = {

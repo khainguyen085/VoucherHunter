@@ -1,10 +1,10 @@
 import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import authActions from "../actions/authActions";
 import GoogleLoginBtn from "../components/ui/LoginBtn";
+import authActions from "../redux/actions/authActions";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email!").required("Email is required!"),
@@ -21,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { error, loadingForm } = useSelector((state) => state.auth);
-  console.log(loadingForm);
+
   const handleSubmit = (values) => {
     const { email, password } = values;
     dispatch(authActions.setLoadingForm());

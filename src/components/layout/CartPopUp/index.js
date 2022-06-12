@@ -1,15 +1,31 @@
 import "@dotlottie/player-component";
-import React from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import cartAction from "../../../redux/actions/cartActions";
 import ProductItem from "./ProductItem";
 
 const CartPopUp = ({ show, setShowCart }) => {
-  const { cart, totalPrice } = useSelector((state) => state.cart);
+  const {user} = useSelector(state => state.auth)
+  const { cart, totalPrice, changed } = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (user) {
+      dispatch(cartAction.getCart())
+    }
+  }, [dispatch, user])
+
+  useEffect(() => {
+    if (changed) {
+      dispatch(cartAction.getCart())
+    }
+  }, [dispatch, changed])
 
   const handlePushCheckout = () => {
     navigate(`/checkout`);
+    setShowCart(false);
   };
   const handlePushCart = () => {
     navigate("/cart");
@@ -40,15 +56,15 @@ const CartPopUp = ({ show, setShowCart }) => {
     >
       <div className="list-product pb-3">
         {cart.map((item) => (
-          <ProductItem {...item} key={item.id} />
+          <ProductItem {...item} key={item._id} />
         ))}
       </div>
       <div className="py-3">
         <div className="d-flex justify-content-between">
           <p>Total</p>
-          <p>${`${totalPrice}`}</p>
+          <p>{Intl.NumberFormat().format(totalPrice)} VND</p>
         </div>
-        <p className="text-primary">
+        <p>
           Taxes and shipping calculated at checkout
         </p>
       </div>

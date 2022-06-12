@@ -1,9 +1,9 @@
 import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import authActions from "../actions/authActions";
+import authActions from "../redux/actions/authActions";
 
 const SignupSchema = Yup.object().shape({
   fullName: Yup.string()

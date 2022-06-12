@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const baseURL = "https://voucher-hunter.herokuapp.com/api";
+// const baseURL = "https://voucher-hunter.herokuapp.com/api";
+const baseURL = "http://localhost:8080/api";
+
 
 const API = {
   async loadUser() {
@@ -44,6 +46,66 @@ const API = {
 
     return response.data;
   },
+  async loadProduct({ page = 1, size, sortBy, order, search, gte, lte }) {
+    const response = await axios.get(
+      `${baseURL}/product?page=${page}${size ? `&size=${size}` : ""}${
+        sortBy ? `&sortBy=${sortBy}` : ""
+      }${order ? `&order=${order}` : ""}${search ? `&search=${search}` : ""}${
+        gte ? `&gte=${gte}` : ""
+      }${lte ? `&size=${lte}` : ""}`
+    );
+
+    if (response.status !== 200) {
+      throw new Error(response.data.msg);
+    }
+
+    return response.data;
+  },
+  async getCart() {
+    const response = await axios.get(`${baseURL}/cart`);
+
+    if (response.status !== 200) {
+      throw new Error(response.data.msg);
+    }
+
+    return response.data;
+  },
+  async addToCart(info) {
+    const response = await axios.post(`${baseURL}/cart`, info);
+
+    if (response.status !== 200) {
+      throw new Error(response.data.msg);
+    }
+
+    return response.data;
+  },
+  async deleteItem(id) {
+    const response = await axios.delete(`${baseURL}/cart/${id}`);
+
+    if (response.status !== 200) {
+      throw new Error(response.data.msg);
+    }
+
+    return response.data;
+  },
+  async updateItem({id, quantity}) {
+    const response = await axios.put(`${baseURL}/cart/${id}`, {quantity});
+
+    if (response.status !== 200) {
+      throw new Error(response.data.msg);
+    }
+
+    return response.data;
+  },
+  async placeOrder(info) {
+    const response = await axios.post(`${baseURL}/order`, info);
+
+    if (response.status !== 200) {
+      throw new Error(response.data.msg);
+    }
+
+    return response.data;
+  }
 };
 
 export default API;

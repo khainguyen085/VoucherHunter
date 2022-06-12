@@ -4,17 +4,17 @@ import {
   delay,
   put,
   takeEvery,
-  takeLatest,
+  takeLatest
 } from "redux-saga/effects";
+import API from "../../services/api";
+import { setAuthToken } from "../../utils/setAuthToken";
 import {
   LOAD_USER,
   LOGIN_GOOGLE,
   LOG_IN,
-  SIGN_UP,
+  SIGN_UP
 } from "../actions/actionType";
 import authActions from "../actions/authActions";
-import API from "../services/api";
-import { setAuthToken } from "../utils/setAuthToken";
 
 function* signupWork({ payload: userInfo }) {
   try {
@@ -41,7 +41,6 @@ function* loginWork({ payload: userInfo }) {
     yield delay(500);
     delete user.password;
     yield put(authActions.getUser(user));
-    console.log(user);
   } catch (err) {
     console.log(err);
     yield put(authActions.loginFailed(err.response?.data.msg));

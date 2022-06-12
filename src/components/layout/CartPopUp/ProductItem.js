@@ -1,19 +1,24 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import cartAction from "../../../redux/actions/cartActions";
+const ProductItem = ({ images, price, title, quantity, _id }) => {
+  const dispatch = useDispatch();
 
-const ProductItem = ({ imgUrl, price, title, quantity, id, totalPrice }) => {
+  const deleteItem = () => {
+    dispatch(cartAction.deleteItem(_id))
+  }
   return (
     <div className="product-info">
       <div className="col-3 product-img">
-        <img src={imgUrl} alt="" />
+        <img src={images[0]} alt="" />
       </div>
       <div>
         <p>{title}</p>
-        <p className="text-primary">
-          {quantity} x ${price.toFixed(2)}
+        <p>
+          {quantity} x {Intl.NumberFormat().format(price)} VND
         </p>
       </div>
       <div>
-        <i className="bi bi-trash"></i>
+        <i className="bi bi-trash" onClick={deleteItem}></i>
       </div>
     </div>
   );

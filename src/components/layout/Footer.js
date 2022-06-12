@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -199,7 +198,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="py-3">
-        <p className="text-center mb-0 text-black">
+        <p className="text-center mb-0 text-white">
           &copy; Copyright belongs to <b>TeamTwo</b>
         </p>
       </div>

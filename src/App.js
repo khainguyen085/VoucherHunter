@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import authActions from "./actions/authActions";
 import Layout from "./components/layout/Layout";
+import authActions from "./redux/actions/authActions";
 import routes from "./routes/index";
 
 const App = () => {
@@ -28,12 +28,12 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {routes[role].withLayout.map((route) => (
-            <Route path={route.path} element={<route.component />} />
+          {routes[role].withLayout.map((route, index) => (
+            <Route key={`route-${index}`} path={route.path} element={<route.component />} />
           ))}
         </Route>
-        {routes[role].withoutLayout.map((route) => (
-          <Route path={route.path} element={<route.component />} />
+        {routes[role].withoutLayout.map((route, index) => (
+          <Route key={`route-2--${index}`} path={route.path} element={<route.component />} />
         ))}
         lfg;pkvdvfbkg.e
         <Route path="*" element={<>Not found</>} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import ProfilePopup from "../ui/ProfilePopup";
@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 const NavBar = () => {
   const navigate = useNavigate();
   const { user, loading } = useSelector((state) => state.auth);
+  const { totalQuantity } = useSelector((state) => state.cart);
   const [showMenu, setShowMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -49,7 +50,7 @@ const NavBar = () => {
     window.addEventListener("scroll", () => {
       const nav = document.querySelector("nav");
       if (nav) {
-        if (window.scrollY > 90) {
+        if (window.scrollY > 500) {
           nav.classList.add("fixed");
         } else {
           nav.classList.remove("fixed");
@@ -102,10 +103,12 @@ const NavBar = () => {
       <div className="nav-right">
         {user ? (
           <>
-            <i
-              className="bi bi-bag-heart"
-              onClick={(e) => toggleShowCart(e)}
-            ></i>
+            <div className="cart-notification" onClick={(e) => toggleShowCart(e)}>
+              <i
+                className="bi bi-bag-heart"
+              ></i>
+              <span className="notification-label">{totalQuantity}</span>
+            </div>
             <div
               className="avt-container"
               onClick={(e) => toggleAccountMenu(e)}

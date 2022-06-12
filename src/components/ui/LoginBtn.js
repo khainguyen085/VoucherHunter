@@ -1,8 +1,8 @@
 import { gapi } from "gapi-script";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
-import authActions from "../../actions/authActions";
+import authActions from "../../redux/actions/authActions";
 import { refreshTokenSetup } from "../../utils/refreshTokenSetup";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;

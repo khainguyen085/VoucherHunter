@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
@@ -17,12 +16,12 @@ const ListCart = () => {
             <p>Quantity</p>
             <p>Total</p>
           </div>
-          {cart.map((item, index) => (
-            <CartItem {...item} key={item.id + index} />
+          {cart.map((item) => (
+            <CartItem {...item} key={item._id} />
           ))}
         </div>
       </div>
-      <p className="subtotal">Subtotal: ${totalPrice}</p>
+      <p className="subtotal">Subtotal: {Intl.NumberFormat().format(totalPrice)} VND</p>
       <div className="button-container">
         <button
           className="btn btn-primary"
